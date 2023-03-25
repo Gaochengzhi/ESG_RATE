@@ -34,7 +34,6 @@ function BarChart({ data }) {
                         >
                         </div>
                         <div className="text-center">{enIndicatorNewValue}</div>
-
                     </div>
                 ))}
             </div>

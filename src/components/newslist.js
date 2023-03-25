@@ -8,10 +8,10 @@ const newsList = ({ news }) => {
                 <ul className="">
                     {news?.map((news) => (
                         <li className="my-2 border-b-2" key={news.link}>
-                            <h2 className="text-xl font-bold mb-2 ">{news[0]}</h2>
+                            <h2 className="text-xl font-bold mb-2 hover:text-blue-500">{news[0]}</h2>
                             <p>时间：{news[1]}</p>
                             <p>摘要：{news[2]}</p>
-                            <a href={news[3]}>链接{news[3]}</a>
+                            <a href={news[3]}>链接: {news[3]}</a>
                         </li>
                     ))}
                 </ul>

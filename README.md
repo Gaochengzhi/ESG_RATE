@@ -1,6 +1,8 @@
 # ESG Rating Website Project
 
-This project is an ESG rating website that utilizes Next.js, Tailwind CSS, and Flask technology.
+This project is for 2022-2023 18th [Citi Financial Innovation Application Competition](https://www.citigroup.com/china/csts/EducationProgram/AboutEducation_CFC.html) project
+
+![Screen Shot 2023-03-25 at 16.28.55](./assets/Screen%20Shot%202023-03-25%20at%2016.28.55.jpg)
 
 ## Getting Started
 
@@ -11,20 +13,24 @@ To get started with this project, you will need to first install the necessary d
 This project requires the following tools to be installed on your local machine:
 
 - Node.js
-- Python
-- Flask
+- Python3
 
 ### Installation
 
-1. Clone the repository to your local machine.
-2. Install the required Node.js packages by running `npm install` in the project directory.
-3. Create a virtual environment for the Flask application by running `python -m venv venv`.
-4. Activate the virtual environment by running `venv\\Scripts\\activate` on Windows, or `source venv/bin/activate` on Linux or MacOS.
-5. Install the required Python packages by running `pip install -r requirements.txt`.
+```
+git clone --depth 1 https://github.com/Gaochengzhi/ESG_RATE
+cd ESG_RATE
+npm install 
+pip3 install --requirement requirements.txt
+```
 
 ## Usage
 
-To start the development server, run `npm run dev` in the project directory. This will start the Next.js server and the Flask server.
+To start the development server, run `npm run dev` in the project directory. This will start the Next.js server
+
+to start the flask server, 
+
+
 
 ## Contributing
 
