@@ -1,6 +1,6 @@
 const ExampleComponent = ({ data }) => {
     return (
-        <div className="p-4 text-lg bg-gray-100  rounded-md">
+        <div className="p-4 text-lg border rounded-md">
             <table className="table-auto w-full">
                 <tbody>
                     <tr>

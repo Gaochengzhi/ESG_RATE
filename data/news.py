@@ -41,6 +41,7 @@ def get_date_from_string(string):
 def get_esg_news(company_name):
     url = f"https://www.googleapis.com/customsearch/v1?key={google_search_api_key}&cx={google_search_engine_id}&q={company_name}+ESG"
     response = requests.get(url)
+    print(response)
     if response.status_code != 200:
         return []
 
@@ -70,7 +71,7 @@ def get_esg_news_handler():
 
 
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run(port=8001)
 
 
 

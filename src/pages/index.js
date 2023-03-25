@@ -4,6 +4,9 @@ import HeaderInfo from '../components/header.js'
 import Detail from '../components/detail.js'
 import RateInfo from '../components/rateinfo.js'
 import NewsList from '../components/newslist.js'
+import Exempt from '../components/exempt.js'
+import Suggest from '../components/suggest.js'
+import Cal from '../components/cal.js'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import Search from '../components/search.js'
@@ -22,9 +25,10 @@ export default function Home() {
     const [rankBar, setrankBar] = useState([]);
     const [inputdata, setInput] = useState({});
     const [otherRate, setOtherRate] = useState("");
+    const [companyName, setCompanyName] = useState("");
     async function fetchNewsList(name) {
-        const company_name = name; // 假设这里输入了一个公司名
-        const response = await axios.post(`http://127.0.0.1:5001/get_esg_news`, {
+        const company_name = name;
+        const response = await axios.post(`http://127.0.0.1:8001/get_esg_news`, {
             company_name: company_name
         }).then(
             response => setNewsList(response.data))
@@ -35,42 +39,41 @@ export default function Home() {
         setInput(value);
         fetchData(value)
     };
-    const fetchData = async (companyName = "美的集团股份有限公司") => {
-        const result = await axios.post('http://47.106.13.220:8081/esg/queryCompanyIndicatorFinalValue', {
-            companyName: companyName
-        }).then(response => setRateData(response.data[companyName]))
+    const fetchData = async (cName = "美的集团股份有限公司") => {
 
-        const companyinfo = await axios.post('http://47.106.13.220:8081/esg/queryCompanyInfo', {
-            companyName: companyName
-        }).then(response =>
+        axios.post('http://47.106.13.220:8081/esg/queryCompanyInfo', {
+            companyName: cName
+        }).then(response => {
             setCompanyInfo(response.data)
+            setCompanyName(response.data.comName)
+            console.log(companyName);
+            fetch(`http://127.0.0.1:8000/esg?company_name=${companyName}`)
+                .then(response => response.json())
+                .then(data => setOtherRate(data))
+                .catch(error => console.error(error))
+            fetchNewsList(companyName)
+
+        }
         )
 
-        const rankbar = await axios.post('http://47.106.13.220:8081/esg/queryRankingData', {
+        axios.post('http://47.106.13.220:8081/esg/queryCompanyIndicatorFinalValue', {
+            companyName: companyName
+        }).then(response => setRateData(response.data[companyName]))
+        axios.post('http://47.106.13.220:8081/esg/queryRankingData', {
             companyName: companyName
         }).then(
             response => setrankBar(response.data)
         )
-
-        console.log(rankBar);
-
         const rateitemList = await axios.post('http://47.106.13.220:8081/esg/queryIndicatorData', {
-            companyName: companyName
+            companyName: cName
         }).then((response) =>
             setRateItemList(response.data))
-        fetch(`http://127.0.0.1:5000/esg?company_name=${companyName}`)
-            .then(response => response.json())
-            .then(data => setOtherRate(data))
-            .catch(error => console.error(error))
-
-        fetchNewsList(companyName)
-
     };
     useEffect(() => {
-        fetchData()
+        fetchData(companyName)
         return () => {
         }
-    }, [])
+    }, [companyName])
 
     return (
         <>
@@ -118,6 +121,16 @@ export default function Home() {
                     <NewsList news={newsList} info={companyInfo} />
                 </div>
 
+                <div className='bg-slate-100 w-full rounded-lg p-5 shadow-md border border-gray-300 mb-7'>
+                    <Suggest info={companyInfo} />
+                </div>
+
+                <div className='bg-slate-100 w-full rounded-lg p-5 shadow-md border border-gray-300 mb-7'>
+                    <Cal info={companyInfo} />
+                </div>
+                <div className='bg-slate-100 w-full rounded-lg p-5 shadow-md border border-gray-300 mb-7'>
+                    <Exempt />
+                </div>
 
                 <div className={styles.grid}>
                     <a

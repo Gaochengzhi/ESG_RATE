@@ -24,8 +24,7 @@ function BarChart({ data }) {
 
                 </div>
                 {sortedData.map(({ enIndicatorNewValue, indicatorAmount }) => (
-                    <div>
-
+                    <div key={enIndicatorNewValue + indicatorAmount}>
                         <div className="text-center ">{indicatorAmount}</div>
                         <div
                             key={enIndicatorNewValue}
