@@ -87,7 +87,7 @@ export default function Home() {
                 <div className="flex sm:flex-row flex-col w-full justify-between items-center ">
                     <div>
                         <a
-                            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+                            href=""
                             target="_blank"
                             rel="noopener noreferrer"
                         >
