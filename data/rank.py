@@ -13,27 +13,6 @@ google_search_engine_id = "07008532d295a427a"
 
 
 def search_market_value(company_name):
-    query = f"{company_name} 市值"
-    url = f"https://www.googleapis.com/customsearch/v1?key={google_search_api_key}&cx={google_search_engine_id}&q={query}"
-    response = requests.get(url)
-    data = response.json()
-
-
-from flask import Flask, request, jsonify
-import requests
-import re
-
-
-from flask_cors import CORS
-
-app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
-google_search_api_key = "AIzaSyBUN66xdp2JuA5kPhkMCGtqDFtJPi_fm5M"
-google_search_engine_id = "07008532d295a427a"
-
-
-def search_market_value(company_name):
     company_name = request.args.get("company_name")
 
     if not company_name:
