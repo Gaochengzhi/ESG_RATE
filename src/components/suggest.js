@@ -10,11 +10,11 @@ function BarChart({ info, cap }) {
     const getCompanySize = (marketCap) => {
         if (marketCap === "unknown") {
             return "unknown";
-        } else if (marketCap >= 100) {
+        } else if (marketCap >= 1000) {
             return "big.png";
-        } else if (marketCap >= 50) {
+        } else if (marketCap >= 500) {
             return "mid.png";
-        } else if (marketCap >= 10) {
+        } else if (marketCap >= 100) {
             return "small.png";
         } else {
             return "miro.jpeg";
@@ -22,7 +22,7 @@ function BarChart({ info, cap }) {
     };
 
     useEffect(() => {
-        setCompanySize(cap);
+        setCompanySize(cap / 100);
         console.log("market", companySize);
         console.log(typeof (companySize));
     }, [cap]);

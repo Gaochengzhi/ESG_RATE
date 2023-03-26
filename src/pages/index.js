@@ -60,7 +60,7 @@ export default function Home() {
                     "Content-Type": "application/json",
                 },
             }).then(response => response.json())
-                .then(data => setMarketCap(data.market_value))
+                .then(data => setMarketCap(data.market_value.market_value))
                 .catch(error => console.error(error))
             fetchNewsList(companyName)
 
