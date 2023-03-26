@@ -23,8 +23,6 @@ function BarChart({ info, cap }) {
 
     useEffect(() => {
         setCompanySize(cap / 100);
-        console.log("market", companySize);
-        console.log(typeof (companySize));
     }, [cap]);
 
     return (

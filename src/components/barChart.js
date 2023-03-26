@@ -9,7 +9,6 @@ const colors = {
 };
 
 function BarChart({ data }) {
-    console.log(data);
     const sortedData = data?.slice()?.sort((a, b) => {
         const order = ["F", "C", "CC", "B", "BB", "A", "AA"];
         return order.indexOf(a.enIndicatorNewValue) - order.indexOf(b.enIndicatorNewValue);
@@ -28,7 +27,7 @@ function BarChart({ data }) {
                         <div className="text-center ">{indicatorAmount}</div>
                         <div
                             key={enIndicatorNewValue}
-                            className={`md:w-16 w-[9vw] rounded-sm ${colors[enIndicatorNewValue]} lg:mx-2 mx-1`}
+                            className={`md:w-16 w-[8.5vw] rounded-sm ${colors[enIndicatorNewValue]} lg:mx-2 mx-1`}
                             style={{ height: `${(indicatorAmount / maxAmount) * 200}px` }}
                         >
                         </div>

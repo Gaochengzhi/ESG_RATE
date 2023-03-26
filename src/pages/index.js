@@ -47,7 +47,6 @@ export default function Home() {
         }).then(response => {
             setCompanyInfo(response.data)
             setCompanyName(response.data.comName)
-            console.log(companyName);
             fetch(`http://124.220.179.145:8000/esg?company_name=${companyName}`)
                 .then(response => response.json())
                 .then(data => setOtherRate(data))
