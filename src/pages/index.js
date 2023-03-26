@@ -54,7 +54,7 @@ export default function Home() {
                 .catch(error => console.error(error))
             fetchNewsList(companyName)
 
-            fetch(`http://124.220.179.145:8002/get_market_value?company_name=${encodeURIComponent(companyName)}`, {
+            fetch(`http://124.220.179.145:8002/get_market_value?company_name=${companyName}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
