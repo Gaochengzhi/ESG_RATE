@@ -1,13 +1,13 @@
 import BarChart from './barChart'
 import OtherRate from './otherRate'
-export default function rateDetail({ rank, otherRate }) {
+export default function rateDetail({ rank, otherRate, info }) {
     return <div className="flex lg:flex-row flex-col justify-between">
         <div>
             <div className="text-xl px-2 pb-2">
                 其他ESG评级机构的最新评级变动:
             </div>
             <div>
-                <OtherRate data={otherRate} />
+                <OtherRate data={otherRate} info={info} />
             </div>
         </div>
         <div>

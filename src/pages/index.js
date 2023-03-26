@@ -28,7 +28,7 @@ export default function Home() {
     const [companyName, setCompanyName] = useState("");
     async function fetchNewsList(name) {
         const company_name = name;
-        const response = await axios.post(`http://127.0.0.1:8001/get_esg_news`, {
+        const response = await axios.post(`http://124.220.179.145:8001/get_esg_news`, {
             company_name: company_name
         }).then(
             response => setNewsList(response.data))
@@ -47,7 +47,7 @@ export default function Home() {
             setCompanyInfo(response.data)
             setCompanyName(response.data.comName)
             console.log(companyName);
-            fetch(`http://127.0.0.1:8000/esg?company_name=${companyName}`)
+            fetch(`http://124.220.179.145:8000/esg?company_name=${companyName}`)
                 .then(response => response.json())
                 .then(data => setOtherRate(data))
                 .catch(error => console.error(error))
@@ -111,7 +111,7 @@ export default function Home() {
                 </div>
 
                 <div className='shadow-md border border-gray-300  bg-slate-100 w-full rounded-lg p-5 my-5'>
-                    <Detail rank={rankBar} otherRate={otherRate} />
+                    <Detail rank={rankBar} otherRate={otherRate} info={companyInfo} />
                 </div>
 
                 <div className='bg-slate-100 w-full rounded-lg p-5 shadow-md border border-gray-300 mb-7'>

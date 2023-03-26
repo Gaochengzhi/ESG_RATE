@@ -16,9 +16,9 @@ google_search_engine_id = "07008532d295a427a"
 
 def get_date_from_string(string):
     date_formats = [
-        r'\b\d{4}-\d{1,2}-\d{1,2}\b',
-        r'\b\d{4}年\d{1,2}月\d{1,2}日\b',
-        r'\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* \d{1,2}, \d{4}\b'
+        r"\b\d{4}-\d{1,2}-\d{1,2}\b",
+        r"\b\d{4}年\d{1,2}月\d{1,2}日\b",
+        r"\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* \d{1,2}, \d{4}\b",
     ]
 
     for date_format in date_formats:
@@ -71,7 +71,4 @@ def get_esg_news_handler():
 
 
 if __name__ == "__main__":
-    app.run(port=8001)
-
-
-
+    app.run(port=8001, host="0.0.0.0")

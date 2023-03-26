@@ -99,7 +99,7 @@ export default function HeaderInfo({ rate, info }) {
                             <div className="text-xl  -my-1">GLOBAL GREEN FINTECH </div>
                         </div>
 
-                        <div className={`w-24 h-24 ${colors[rate] || "bg-red-500"} rounded-full flex justify-center items-center  border-4 border-gray-200 shadow-lg text-3xl text-white`}>
+                        <div className={`w-20 h-20 ${colors[rate] || "bg-red-500"} rounded-full flex justify-center items-center  border-4 border-gray-200 shadow-lg text-3xl text-white`}>
                             {rate || "N/A"}
                         </div>
                     </div>

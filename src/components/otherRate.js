@@ -1,10 +1,10 @@
-const ExampleComponent = ({ data }) => {
+const ExampleComponent = ({ data, info }) => {
     return (
         <div className="p-4 text-lg border rounded-md">
             <table className="table-auto w-full">
                 <tbody>
                     <tr>
-                        <td className="text-xl font-bold px-4 py-2">{data.company_name}</td>
+                        <td className="text-xl font-bold px-4 py-2">{info?.comName}</td>
                     </tr>
                     <tr>
                         <td className=" px-4 py-2">华证ESG</td>
