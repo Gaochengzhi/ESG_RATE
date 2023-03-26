@@ -2,10 +2,15 @@ from flask import Flask, request, jsonify
 import requests
 import re
 
+
+from flask_cors import CORS
+
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 google_search_api_key = "AIzaSyBUN66xdp2JuA5kPhkMCGtqDFtJPi_fm5M"
 google_search_engine_id = "07008532d295a427a"
+
 
 def search_market_value(company_name):
     query = f"{company_name} 市值"
@@ -13,11 +18,11 @@ def search_market_value(company_name):
     response = requests.get(url)
     data = response.json()
 
-    if 'items' not in data:
+    if "items" not in data:
         return None
 
-    for item in data['items']:
-        snippet = item['snippet']
+    for item in data["items"]:
+        snippet = item["snippet"]
         match = re.search(r"市值\s*([0-9]+(\.[0-9]+)?)(亿|百万)", snippet)
         if match:
             market_value = float(match.group(1))
@@ -30,9 +35,10 @@ def search_market_value(company_name):
 
     return None
 
-@app.route('/get_market_value', methods=['GET'])
+
+@app.route("/get_market_value", methods=["GET"])
 def get_market_value():
-    company_name = request.args.get('company_name')
+    company_name = request.args.get("company_name")
     if not company_name:
         return jsonify({"error": "Missing company_name parameter"}), 400
 
@@ -42,6 +48,6 @@ def get_market_value():
 
     return jsonify({"market_value": market_value})
 
-if __name__ == '__main__':
-    app.run(debug=True,port=8002, host='0.0.0.0')
 
+if __name__ == "__main__":
+    app.run(debug=True, port=8002, host="0.0.0.0")

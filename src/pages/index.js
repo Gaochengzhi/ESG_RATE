@@ -54,14 +54,13 @@ export default function Home() {
                 .catch(error => console.error(error))
             fetchNewsList(companyName)
 
-            fetch("http://124.220.179.145:8002//company_market_cap", {
-                method: "POST",
+            fetch(`http://124.220.179.145:8002/get_market_value?company_name=${encodeURIComponent(companyName)}`, {
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ company_name: companyName }),
             }).then(response => response.json())
-                .then(data => setMarketCap(data.market_cap))
+                .then(data => setMarketCap(data.market_value))
                 .catch(error => console.error(error))
             fetchNewsList(companyName)
 
