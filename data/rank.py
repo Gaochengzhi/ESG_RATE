@@ -13,27 +13,44 @@ google_search_engine_id = "07008532d295a427a"
 
 
 def search_market_value(company_name):
+    company_name = request.args.get('company_name')
+
+    if not company_name:
+        return {"error": "Missing company_name parameter"}, 400
+
     query = f"{company_name} 市值"
-    url = f"https://www.googleapis.com/customsearch/v1?key={google_search_api_key}&cx={google_search_engine_id}&q={query}"
-    response = requests.get(url)
+
+    response = requests.get(
+        'https://www.googleapis.com/customsearch/v1',
+        params={
+            'key': google_search_api_key,
+            'cx': google_search_engine_id,
+            'q': query,
+        },
+    )
+
+    if response.status_code != 200:
+        return {"error": f"Google search API request failed with status {response.status_code}"}, response.status_code
+
     data = response.json()
+    snippet = None
 
-    if "items" not in data:
-        return None
+    for item in data.get("items", []):
+        snippet = item.get("snippet")
+        if snippet:
+            break
 
-    for item in data["items"]:
-        snippet = item["snippet"]
-        match = re.search(r"市值\s*([0-9]+(\.[0-9]+)?)(亿|百万)", snippet)
-        if match:
-            market_value = float(match.group(1))
-            unit = match.group(3)
-            if unit == "亿":
-                market_value *= 100  # Convert to hundreds of millions of yuan
-            elif unit == "百万":
-                market_value /= 10  # Convert to hundreds of millions of yuan
-            return market_value
+    if not snippet:
+        return {"error": "No search result found"}, 404
 
-    return None
+    pattern = re.compile(r"(\d+\.\d+)亿")
+    match = pattern.search(snippet)
+
+    if match:
+        market_value = float(match.group(1)) * 100
+        return {"market_value": market_value}
+    else:
+        return {"error": "Market value not found in search results"}, 404
 
 
 @app.route("/get_market_value", methods=["GET"])
