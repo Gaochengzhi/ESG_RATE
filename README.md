@@ -2,6 +2,8 @@
 
 This project is for 2022-2023 18th [Citi Financial Innovation Application Competition](https://www.citigroup.com/china/csts/EducationProgram/AboutEducation_CFC.html) project
 
+
+
 ![Screen Shot 2023-03-25 at 16.28.55](./assets/Screen%20Shot%202023-03-25%20at%2016.28.55.jpg)
 
 ## Getting Started
@@ -28,7 +30,23 @@ pip3 install --requirement requirements.txt
 
 To start the development server, run `npm run dev` in the project directory. This will start the Next.js server
 
-to start the flask server, 
+to start the flask server, go into `data` file, you can either use `tmux` to mutitask or use `nohup` to put take into backgroud
+
+```shell
+nohup python3 new.py &
+bohup python3 server.py &
+```
+
+afterthat you can start dev or build this project:
+
+```shell
+npm run dev # for development
+```
+
+```shell
+npm run build # for production deployment
+npm run start
+```
 
 
 

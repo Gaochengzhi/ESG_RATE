@@ -26,6 +26,7 @@ export default function Home() {
     const [inputdata, setInput] = useState({});
     const [otherRate, setOtherRate] = useState("");
     const [companyName, setCompanyName] = useState("");
+    const [marketCap, setMarketCap] = useState("");
     async function fetchNewsList(name) {
         const company_name = name;
         const response = await axios.post(`http://124.220.179.145:8001/get_esg_news`, {
@@ -50,6 +51,17 @@ export default function Home() {
             fetch(`http://124.220.179.145:8000/esg?company_name=${companyName}`)
                 .then(response => response.json())
                 .then(data => setOtherRate(data))
+                .catch(error => console.error(error))
+            fetchNewsList(companyName)
+
+            fetch("http://124.220.179.145:8002//company_market_cap", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ company_name: companyName }),
+            }).then(response => response.json())
+                .then(data => setMarketCap(data.market_cap))
                 .catch(error => console.error(error))
             fetchNewsList(companyName)
 
@@ -122,7 +134,7 @@ export default function Home() {
                 </div>
 
                 <div className='bg-slate-100 w-full rounded-lg p-5 shadow-md border border-gray-300 mb-7'>
-                    <Suggest info={companyInfo} />
+                    <Suggest info={companyInfo} cap={marketCap} />
                 </div>
 
                 <div className='bg-slate-100 w-full rounded-lg p-5 shadow-md border border-gray-300 mb-7'>
